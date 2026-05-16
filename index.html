@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS Office Setup</title>
+    <meta name="description"
+        content="Download and install MS Office Setup easily. Get Microsoft Office tools like Word, Excel, PowerPoint, and Outlook with a simple and secure installation process.">
+    <meta name="keywords"
+        content="ms office setup, download ms office, office setup, microsoft office, word, excel, powerpoint, outlook">
+    <meta name="author" content="Office Setup">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #222;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 420px;
+            min-height: 100vh;
+            background: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: #0078d4;
+            padding: 16px 14px 14px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ms-logo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .ms-logo span {
+            border-radius: 1px;
+            display: block;
+        }
+
+        .ms-logo span:nth-child(1) {
+            background: #f25022;
+        }
+
+        .ms-logo span:nth-child(2) {
+            background: #7fba00;
+        }
+
+        .ms-logo span:nth-child(3) {
+            background: #00a4ef;
+        }
+
+        .ms-logo span:nth-child(4) {
+            background: #ffb900;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header h1 span {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.78);
+            margin-top: 1px;
+        }
+
+        /* Search */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 4px;
+            padding: 8px 12px;
+            gap: 7px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 13px;
+            font-family: inherit;
+            color: #333;
+        }
+
+        .search-box input::placeholder {
+            color: #aaa;
+        }
+
+        .search-box .si {
+            display: flex;
+            align-items: center;
+            color: #999;
+        }
+
+        /* ── COUNT ROW ── */
+        .count-row {
+            padding: 10px 14px 4px;
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* ── LIST ── */
+        .list {
+            flex: 1;
+            padding: 4px 10px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: white;
+            border: 1px solid #e0e5ea;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: .04s
+        }
+
+        .card:nth-child(2) {
+            animation-delay: .08s
+        }
+
+        .card:nth-child(3) {
+            animation-delay: .12s
+        }
+
+        .card:nth-child(4) {
+            animation-delay: .16s
+        }
+
+        .card:nth-child(5) {
+            animation-delay: .20s
+        }
+
+        .card:nth-child(6) {
+            animation-delay: .24s
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Version badge */
+        .v-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .v-2007 {
+            background: #78909c;
+        }
+
+        .v-2010 {
+            background: #42a5f5;
+        }
+
+        .v-2016 {
+            background: #1e88e5;
+        }
+
+        .v-2019 {
+            background: #8e24aa;
+        }
+
+        .v-2021 {
+            background: #00897b;
+        }
+
+        .v-2024 {
+            background: #f57c00;
+        }
+
+        /* Card body */
+        .card-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .card-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .tag {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            padding: 2px 6px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            background: #e8f0fe;
+            color: #1565c0;
+        }
+
+        .tag-old {
+            background: #eceff1;
+            color: #607d8b;
+        }
+
+        .tag-stable {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .tag-popular {
+            background: #e8eaf6;
+            color: #283593;
+        }
+
+        .tag-new {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+
+        .tag-latest {
+            background: #e0f2f1;
+            color: #00695c;
+        }
+
+        .tag-newest {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .os-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .chip {
+            background: #f0f4f8;
+            border: 1px solid #dde2e8;
+            color: #666;
+            font-size: 9.5px;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
+
+        /* Download button */
+        .dl-btn {
+            flex-shrink: 0;
+            padding: 8px 14px;
+            border-radius: 4px;
+            border: none;
+            background: #0078d4;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            transition: background 0.18s, transform 0.14s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .dl-btn:active:not(:disabled) {
+            background: #005ea6;
+            transform: scale(0.93);
+        }
+
+        .dl-btn:disabled {
+            background: #8dbde8;
+            cursor: not-allowed;
+        }
+
+        .dl-btn .btn-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .spin {
+            width: 13px;
+            height: 13px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            display: none;
+            animation: rot 0.65s linear infinite;
+        }
+
+        @keyframes rot {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Empty state */
+        .empty {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 8px;
+            color: #aaa;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .empty .e-icon {
+            font-size: 32px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 14px 16px 18px;
+            font-size: 10px;
+            color: #bbb;
+            border-top: 1px solid #e0e5ea;
+            background: white;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(12px);
+            background: #1a1a1a;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 20px;
+            white-space: nowrap;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s, transform 0.25s;
+            max-width: 90vw;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-row">
+                <div class="ms-logo">
+                    <span></span><span></span>
+                    <span></span><span></span>
+                </div>
+                <h1>MS Office Setup
+                    <span>Select version to download</span>
+                </h1>
+            </div>
+            <div class="search-box">
+                <span class="si"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg></span>
+                <input type="text" id="searchInput" placeholder="Search version…" oninput="filterCards()">
+            </div>
+        </div>
+
+        <div class="count-row" id="countRow">6 versions available</div>
+
+        <!-- CARD LIST -->
+        <div class="list" id="cardList">
+
+            <div class="card" data-v="2007">
+                <div class="v-badge v-2007">07</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2007</span>
+                        <span class="tag tag-old">OLD</span>
+                    </div>
+                    <div class="card-desc">For Windows XP, Vista, 7</div>
+                    <div class="os-chips">
+                        <span class="chip">Win XP</span>
+                        <span class="chip">Vista</span>
+                        <span class="chip">Win 7</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2007" onclick="startDownload('2007')" aria-label="Download Office 2007">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2007"></div>
+                </button>
+            </div>
+
+            <div class="card" data-v="2010">
+                <div class="v-badge v-2010">10</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2010</span>
+                        <span class="tag tag-stable">STABLE</span>
+                    </div>
+                    <div class="card-desc">Lightweight, widely used</div>
+                    <div class="os-chips">
+                        <span class="chip">Vista</span>
+                        <span class="chip">Win 7</span>
+                        <span class="chip">Win 8</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2010" onclick="startDownload('2010')" aria-label="Download Office 2010">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2010"></div>
+                </button>
+            </div>
+
+            <div class="card" data-v="2016">
+                <div class="v-badge v-2016">16</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2016</span>
+                        <span class="tag tag-popular">POPULAR</span>
+                    </div>
+                    <div class="card-desc">Modern UI, better compatibility</div>
+                    <div class="os-chips">
+                        <span class="chip">Win 7</span>
+                        <span class="chip">Win 8</span>
+                        <span class="chip">Win 10</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2016" onclick="startDownload('2016')" aria-label="Download Office 2016">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2016"></div>
+                </button>
+            </div>
+
+            <div class="card" data-v="2019">
+                <div class="v-badge v-2019">19</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2019</span>
+                        <span class="tag tag-new">NEW</span>
+                    </div>
+                    <div class="card-desc">Dark mode, improved speed</div>
+                    <div class="os-chips">
+                        <span class="chip">Win 10</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2019" onclick="startDownload('2019')" aria-label="Download Office 2019">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2019"></div>
+                </button>
+            </div>
+
+            <div class="card" data-v="2021">
+                <div class="v-badge v-2021">21</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2021</span>
+                        <span class="tag tag-latest">LATEST</span>
+                    </div>
+                    <div class="card-desc">Best for Win 10 &amp; 11</div>
+                    <div class="os-chips">
+                        <span class="chip">Win 10</span>
+                        <span class="chip">Win 11</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2021" onclick="startDownload('2021')" aria-label="Download Office 2021">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2021"></div>
+                </button>
+            </div>
+
+            <div class="card" data-v="2024">
+                <div class="v-badge v-2024">24</div>
+                <div class="card-body">
+                    <div class="name-row">
+                        <span class="card-name">Office 2024</span>
+                        <span class="tag tag-newest">NEWEST</span>
+                    </div>
+                    <div class="card-desc">AI-powered, latest release</div>
+                    <div class="os-chips">
+                        <span class="chip">Win 11</span>
+                    </div>
+                </div>
+                <button class="dl-btn" id="btn-2024" onclick="startDownload('2024')" aria-label="Download Office 2024">
+                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg></span>
+                    <span class="btn-label">Download</span>
+                    <div class="spin" id="spin-2024"></div>
+                </button>
+            </div>
+
+
+            <div class="empty" id="emptyState">
+                <div class="e-icon">🔎</div>
+                <div>No results for "<span id="emptyQ"></span>"</div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            © 2026 MS Office Setup · All trademarks belong to Microsoft
+        </div>
+
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        const links = {
+            '2007': 'https://tinyurl.com/office12setup',
+            '2010': 'https://tinyurl.com/office14setup',
+            '2016': 'https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/en-US/ProPlusRetail.img',
+            '2019': 'https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2019Retail.img',
+            '2021': 'https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/en-US/ProPlus2021Retail.img',
+            '2024': 'https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img'
+        };
+
+        function startDownload(v) {
+            const btn = document.getElementById('btn-' + v);
+            const icon = btn.querySelector('.btn-icon');
+            const label = btn.querySelector('.btn-label');
+            const spin = btn.querySelector('.spin');
+            btn.disabled = true;
+            icon.style.display = 'none';
+            label.style.display = 'none';
+            spin.style.display = 'block';
+            showToast('Downloading Office ' + v + '…');
+            setTimeout(() => {
+                window.location.href = links[v];
+                setTimeout(() => {
+                    btn.disabled = false;
+                    icon.style.display = '';
+                    label.style.display = '';
+                    spin.style.display = 'none';
+                }, 2500);
+            }, 1000);
+        }
+
+
+        function filterCards() {
+            const q = document.getElementById('searchInput').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('.card[data-v]');
+            let n = 0;
+            cards.forEach(c => {
+                const show = !q || c.dataset.v.includes(q);
+                c.style.display = show ? '' : 'none';
+                if (show) n++;
+            });
+            const empty = document.getElementById('emptyState');
+            document.getElementById('countRow').textContent = n + ' version' + (n !== 1 ? 's' : '') + ' available';
+            empty.style.display = n === 0 ? 'flex' : 'none';
+            if (n === 0) document.getElementById('emptyQ').textContent = q;
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._t);
+            t._t = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+    </script>
+
+</body>
+
+</html>
