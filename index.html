@@ -41,27 +41,38 @@
 
         /* ── HEADER ── */
         .header {
-            background: #0078d4;
-            padding: 16px 14px 14px;
+            background: #ffffff;
+            padding: 14px 16px 12px;
             position: sticky;
             top: 0;
             z-index: 10;
+            border-bottom: 1px solid #e0e5ea;
         }
 
-        .header-row {
+        .header-top {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+        }
+
+        .ms-logo-wrap {
+            width: 36px;
+            height: 36px;
+            background: #f0f4f8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .ms-logo {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2px;
-            width: 26px;
-            height: 26px;
-            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
         }
 
         .ms-logo span {
@@ -85,28 +96,49 @@
             background: #ffb900;
         }
 
-        .header h1 {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
+        .header-titles {
+            flex: 1;
+            min-width: 0;
         }
 
-        .header h1 span {
-            display: block;
-            font-size: 10px;
+        .header-titles h1 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+            line-height: 1.2;
+        }
+
+        .header-titles .subtitle {
+            font-size: 10.5px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.78);
+            color: #888;
             margin-top: 1px;
+        }
+
+        .header-count-pill {
+            background: #e8f0fe;
+            color: #1a6dd4;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 20px;
+            flex-shrink: 0;
         }
 
         /* Search */
         .search-box {
             display: flex;
             align-items: center;
-            background: white;
-            border-radius: 4px;
+            background: #f0f4f8;
+            border: 1px solid #dde2e8;
+            border-radius: 8px;
             padding: 8px 12px;
-            gap: 7px;
+            gap: 8px;
+        }
+
+        .search-box:focus-within {
+            border-color: #e0e5ea;
+            background: #fff;
         }
 
         .search-box input {
@@ -115,7 +147,8 @@
             outline: none;
             font-size: 13px;
             font-family: inherit;
-            color: #333;
+            color: #222;
+            background: transparent;
         }
 
         .search-box input::placeholder {
@@ -293,7 +326,21 @@
         .card-desc {
             font-size: 11px;
             color: #888;
+            margin-bottom: 5px;
+        }
+
+        .file-size {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            color: #0078d4;
+            font-weight: 500;
             margin-bottom: 6px;
+        }
+
+        .file-size svg {
+            flex-shrink: 0;
         }
 
         .os-chips {
@@ -331,6 +378,21 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        .btn-wrap {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-wrap .file-size {
+            font-size: 9.5px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
         .dl-btn:active:not(:disabled) {
             background: #005ea6;
             transform: scale(0.93);
@@ -344,6 +406,16 @@
         .dl-btn .btn-icon {
             display: flex;
             align-items: center;
+            position: relative;
+            width: 13px;
+            height: 13px;
+        }
+
+        .dl-btn .btn-icon svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.15s;
         }
 
         .spin {
@@ -352,6 +424,9 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
             display: none;
             animation: rot 0.65s linear infinite;
         }
@@ -420,14 +495,18 @@
 
         <!-- HEADER -->
         <div class="header">
-            <div class="header-row">
-                <div class="ms-logo">
-                    <span></span><span></span>
-                    <span></span><span></span>
+            <div class="header-top">
+                <div class="ms-logo-wrap">
+                    <div class="ms-logo">
+                        <span></span><span></span>
+                        <span></span><span></span>
+                    </div>
                 </div>
-                <h1>MS Office Setup
-                    <span>Select version to download</span>
-                </h1>
+                <div class="header-titles">
+                    <h1>MS Office Setup</h1>
+                    <div class="subtitle">Select version to download</div>
+                </div>
+                <div class="header-count-pill" id="headerPill">6 versions</div>
             </div>
             <div class="search-box">
                 <span class="si"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
@@ -459,17 +538,22 @@
                         <span class="chip">Win 7</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2007" onclick="startDownload('2007')" aria-label="Download Office 2007">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2007"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2007" onclick="startDownload('2007')"
+                        aria-label="Download Office 2007">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2007"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">506 MB .zip file</span>
+                </div>
             </div>
 
             <div class="card" data-v="2010">
@@ -486,17 +570,22 @@
                         <span class="chip">Win 8</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2010" onclick="startDownload('2010')" aria-label="Download Office 2010">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2010"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2010" onclick="startDownload('2010')"
+                        aria-label="Download Office 2010">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2010"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">656 MB .zip file</span>
+                </div>
             </div>
 
             <div class="card" data-v="2016">
@@ -513,17 +602,22 @@
                         <span class="chip">Win 10</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2016" onclick="startDownload('2016')" aria-label="Download Office 2016">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2016"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2016" onclick="startDownload('2016')"
+                        aria-label="Download Office 2016">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2016"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">4.13 GB .iso file</span>
+                </div>
             </div>
 
             <div class="card" data-v="2019">
@@ -538,17 +632,22 @@
                         <span class="chip">Win 10</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2019" onclick="startDownload('2019')" aria-label="Download Office 2019">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2019"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2019" onclick="startDownload('2019')"
+                        aria-label="Download Office 2019">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2019"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">3.99 GB .iso file</span>
+                </div>
             </div>
 
             <div class="card" data-v="2021">
@@ -564,17 +663,22 @@
                         <span class="chip">Win 11</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2021" onclick="startDownload('2021')" aria-label="Download Office 2021">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2021"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2021" onclick="startDownload('2021')"
+                        aria-label="Download Office 2021">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2021"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">4.71 GB .iso file</span>
+                </div>
             </div>
 
             <div class="card" data-v="2024">
@@ -589,17 +693,22 @@
                         <span class="chip">Win 11</span>
                     </div>
                 </div>
-                <button class="dl-btn" id="btn-2024" onclick="startDownload('2024')" aria-label="Download Office 2024">
-                    <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7,10 12,15 17,10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg></span>
-                    <span class="btn-label">Download</span>
-                    <div class="spin" id="spin-2024"></div>
-                </button>
+                <div class="btn-wrap">
+                    <button class="dl-btn" id="btn-2024" onclick="startDownload('2024')"
+                        aria-label="Download Office 2024">
+                        <span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7,10 12,15 17,10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <div class="spin" id="spin-2024"></div>
+                        </span>
+                        <span class="btn-label">Download</span>
+                    </button>
+                    <span class="file-size">5.14 GB .iso file</span>
+                </div>
             </div>
 
 
@@ -610,19 +719,14 @@
 
         </div>
 
-        <!-- FOOTER -->
-        <div class="footer">
-            © 2026 MS Office Setup · All trademarks belong to Microsoft
-        </div>
-
     </div>
 
     <div id="toast"></div>
 
     <script>
         const links = {
-            '2007': 'https://tinyurl.com/office12setup',
-            '2010': 'https://tinyurl.com/office14setup',
+            '2007': 'https://drive.google.com/uc?export=download&id=1uh28n0QFo4UjR1AtL6R5GdwT9tdafOaG',
+            '2010': 'https://drive.google.com/uc?export=download&id=1IcknCzbAC2-do64cwe00NrDPRh-SLDuq',
             '2016': 'https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/en-US/ProPlusRetail.img',
             '2019': 'https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2019Retail.img',
             '2021': 'https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/en-US/ProPlus2021Retail.img',
@@ -631,20 +735,17 @@
 
         function startDownload(v) {
             const btn = document.getElementById('btn-' + v);
-            const icon = btn.querySelector('.btn-icon');
-            const label = btn.querySelector('.btn-label');
+            const svgIcon = btn.querySelector('.btn-icon svg');
             const spin = btn.querySelector('.spin');
             btn.disabled = true;
-            icon.style.display = 'none';
-            label.style.display = 'none';
+            svgIcon.style.display = 'none';
             spin.style.display = 'block';
             showToast('Downloading Office ' + v + '…');
             setTimeout(() => {
                 window.location.href = links[v];
                 setTimeout(() => {
                     btn.disabled = false;
-                    icon.style.display = '';
-                    label.style.display = '';
+                    svgIcon.style.display = '';
                     spin.style.display = 'none';
                 }, 2500);
             }, 1000);
@@ -662,6 +763,8 @@
             });
             const empty = document.getElementById('emptyState');
             document.getElementById('countRow').textContent = n + ' version' + (n !== 1 ? 's' : '') + ' available';
+            const pill = document.getElementById('headerPill');
+            if (pill) pill.textContent = n + ' version' + (n !== 1 ? 's' : '');
             empty.style.display = n === 0 ? 'flex' : 'none';
             if (n === 0) document.getElementById('emptyQ').textContent = q;
         }
